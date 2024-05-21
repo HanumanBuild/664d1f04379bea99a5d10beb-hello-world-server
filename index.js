@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const fs = require('fs-extra');
+const markdownIt = require('markdown-it');
+const md = new markdownIt();
 
 // Use the PORT environment variable or default to 3000
 const port = process.env.PORT || 3000;
@@ -8,11 +11,6 @@ const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
-
-// Add the following code to create a new route that serves the documentation when the /docs URL is accessed
-const fs = require('fs-extra');
-const markdownIt = require('markdown-it');
-const md = new markdownIt();
 
 // Create a route to serve the documentation
 app.get('/docs', async (req, res) => {
@@ -25,7 +23,7 @@ app.get('/docs', async (req, res) => {
   }
 });
 
-// Start the server and listen on the specified port
+// Start the server
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
